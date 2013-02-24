@@ -136,24 +136,24 @@ describe("Html2Markdown", function() {
   describe("should translate ul lists", function() {
     
     it('should handle list with one item', function() {
-      expect(Html2Markdown("<ul><li>Hej</li></ul>")).toEqual("- Hej\n")
-    })
+      expect(Html2Markdown("<ul><li>Hej</li></ul>")).toEqual("- Hej\n");
+    });
     
     it('should handle list with many items', function() {
-      expect(Html2Markdown("<ul><li>Hej 1</li><li>Hej 2</li></ul>")).toEqual("- Hej 1\n- Hej 2\n")
-    })
+      expect(Html2Markdown("<ul><li>Hej 1</li><li>Hej 2</li></ul>")).toEqual("- Hej 1\n- Hej 2\n");
+    });
     
   });
   
   describe("should translate ol lists", function() {
     
     it('should handle list with one item', function() {
-      expect(Html2Markdown("<ol><li>Hej</li></ol>")).toEqual("1. Hej\n")
-    })
+      expect(Html2Markdown("<ol><li>Hej</li></ol>")).toEqual("1. Hej\n");
+    });
     
     it('should handle list with many items', function() {
-      expect(Html2Markdown("<ol><li>Hej 1</li><li>Hej 2</li></ol>")).toEqual("1. Hej 1\n2. Hej 2\n")
-    })
+      expect(Html2Markdown("<ol><li>Hej 1</li><li>Hej 2</li></ol>")).toEqual("1. Hej 1\n2. Hej 2\n");
+    });
     
   });
   
