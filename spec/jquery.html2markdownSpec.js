@@ -12,6 +12,8 @@ var markdownStrings = [
 ,"<img src=\"/files/test.png\">"
 ,'<a href="http://www.google.com"><em>Google</em></a>'
 ,"_**help**_"
+,"- Item1\n- Item2\n- Item3"
+,"1. Item1\n2. Item2\n3. Item3"
 ];
 
 describe("Html2Markdown", function() {
@@ -102,6 +104,30 @@ describe("Html2Markdown", function() {
     it("should not translate elements within a div", function() {
       expect(Html2Markdown("<div><strong>Just some text</strong></div>")).toEqual("<div><strong>Just some text</strong></div>");
     });
+  });
+  
+  describe("should translate ul lists", function() {
+    
+    it('should handle list with one item', function() {
+      expect(Html2Markdown("<ul><li>Hej</li></ul>")).toEqual("- Hej\n")
+    })
+    
+    it('should handle list with many items', function() {
+      expect(Html2Markdown("<ul><li>Hej 1</li><li>Hej 2</li></ul>")).toEqual("- Hej 1\n- Hej 2\n")
+    })
+    
+  });
+  
+  describe("should translate ol lists", function() {
+    
+    it('should handle list with one item', function() {
+      expect(Html2Markdown("<ol><li>Hej</li></ol>")).toEqual("1. Hej\n")
+    })
+    
+    it('should handle list with many items', function() {
+      expect(Html2Markdown("<ol><li>Hej 1</li><li>Hej 2</li></ol>")).toEqual("1. Hej 1\n2. Hej 2\n")
+    })
+    
   });
   
 }); 

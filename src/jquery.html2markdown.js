@@ -25,6 +25,20 @@ function Html2Markdown(value) {
     }
   });
   
+  dom.find("ul").each(function() {
+    $(this).find('li').each(function() {
+      $(this).replaceWith("- "+$(this).text()+"\n");
+    });
+    $(this).replaceWith($(this).text());
+  });
+  
+  dom.find("ol").each(function() {
+    $(this).find('li').each(function(index,value) {
+      $(this).replaceWith((index+1)+". "+$(this).text()+"\n");
+    });
+    $(this).replaceWith($(this).text());
+  });
+  
   $.each(["h1",'h2','h3','h4','h5'],function(index,value) {
     
     var hashes = "";
