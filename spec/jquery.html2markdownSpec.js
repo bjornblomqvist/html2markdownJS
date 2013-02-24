@@ -69,6 +69,14 @@ describe("Html2Markdown", function() {
       expect(Html2Markdown("<div><h4>Heading 4</h4></div>")).toEqual("<div><h4>Heading 4</h4></div>");
       expect(Html2Markdown("<div><h5>Heading 5</h5></div>")).toEqual("<div><h5>Heading 5</h5></div>");
     });
+    
+    it('should not translate elements with a attribute', function() {
+      expect(Html2Markdown("<h1 class=\"\">Heading 1</h1>")).toEqual("<h1 class=\"\">Heading 1</h1>");
+      expect(Html2Markdown("<h2 class=\"\">Heading 2</h2>")).toEqual("<h2 class=\"\">Heading 2</h2>");
+      expect(Html2Markdown("<h3 class=\"\">Heading 3</h3>")).toEqual("<h3 class=\"\">Heading 3</h3>");
+      expect(Html2Markdown("<h4 class=\"\">Heading 4</h4>")).toEqual("<h4 class=\"\">Heading 4</h4>");
+      expect(Html2Markdown("<h5 class=\"\">Heading 5</h5>")).toEqual("<h5 class=\"\">Heading 5</h5>");
+    });
 
   });
   

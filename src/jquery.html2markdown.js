@@ -54,15 +54,18 @@ function Html2Markdown(value) {
     }
     
     dom.find("> "+value).each(function() {
-      $(this).find("> strong").each(function() {
-        $(this).replaceWith("**"+$(this).html()+"**"); 
-      });
       
-      $(this).find("> em").each(function() {
-        $(this).replaceWith("_"+$(this).html()+"_"); 
-      });
+      if($(this).get(0).attributes.length === 0) {      
+        $(this).find("> strong").each(function() {
+          $(this).replaceWith("**"+$(this).html()+"**"); 
+        });
       
-      $(this).replaceWith(hashes+" "+$.trim($(this).html())); 
+        $(this).find("> em").each(function() {
+          $(this).replaceWith("_"+$(this).html()+"_"); 
+        });
+      
+        $(this).replaceWith(hashes+" "+$.trim($(this).html())); 
+      }
     });
   });
   
