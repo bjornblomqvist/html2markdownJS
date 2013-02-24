@@ -15,6 +15,8 @@ function Html2Markdown(value) {
     $(this).replaceWith("_"+$(this).text()+"_"); 
   });
   
+  
+  
   dom.find("> strong, > p > strong, > ul > li > strong").each(function() {
     $(this).replaceWith("**"+$(this).text()+"**"); 
   });
@@ -48,6 +50,14 @@ function Html2Markdown(value) {
     }
     
     dom.find("> "+value).each(function() {
+      $(this).find("> strong").each(function() {
+        $(this).replaceWith("**"+$(this).text()+"**"); 
+      });
+      
+      $(this).find("> em").each(function() {
+        $(this).replaceWith("_"+$(this).text()+"_"); 
+      });
+      
       $(this).replaceWith(hashes+" "+$.trim($(this).text())); 
     });
   });
