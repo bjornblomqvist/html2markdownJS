@@ -21,7 +21,7 @@ function Html2Markdown(value) {
   
   dom.find("> p").each(function() {
     if($(this).get(0).attributes.length === 0) {
-     $(this).replaceWith($(this).text()); 
+     $(this).replaceWith($(this).html()); 
     }
   });
   
