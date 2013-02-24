@@ -24,6 +24,7 @@ var markdownStrings = [
 ,"_**<span>Hej</span>**_"
 ,"- <span>Yes we can!</span>"
 ,"1. <span>Yes we can!</span>"
+,"- Test <br>\n- Fun!"
 ];
 
 describe("Html2Markdown", function() {
