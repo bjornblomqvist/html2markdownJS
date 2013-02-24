@@ -21,7 +21,7 @@ function Html2Markdown(value) {
     $(this).replaceWith("**"+$(this).html()+"**"); 
   });
   
-  dom.find("> p").each(function() {
+  dom.find("> p, blockquote > p").each(function() {
     if($(this).get(0).attributes.length === 0) {
      $(this).replaceWith($(this).html()); 
     }
@@ -39,6 +39,10 @@ function Html2Markdown(value) {
       $(this).replaceWith((index+1)+". "+$(this).html()+"\n");
     });
     $(this).replaceWith($(this).html());
+  });
+  
+  dom.find('blockquote').each(function() {
+    $(this).replaceWith("> "+$(this).html());
   });
   
   $.each(["h1",'h2','h3','h4','h5'],function(index,value) {
@@ -62,5 +66,5 @@ function Html2Markdown(value) {
     });
   });
   
-  return dom.html();
+  return dom.html().replace(/^&gt;/,'>');
 }

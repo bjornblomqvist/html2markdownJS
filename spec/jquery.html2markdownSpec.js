@@ -25,6 +25,7 @@ var markdownStrings = [
 ,"- <span>Yes we can!</span>"
 ,"1. <span>Yes we can!</span>"
 ,"- Test <br>\n- Fun!"
+,"> Paragraph one\nParagraph two"
 ];
 
 describe("Html2Markdown", function() {
@@ -75,6 +76,10 @@ describe("Html2Markdown", function() {
     
     it('should translate elements in the root', function() {
       expect(Html2Markdown("<p>Just some text</p>")).toEqual("Just some text");
+    });
+    
+    it('should translate elements in the blockquote', function() {
+      expect(Html2Markdown("<blockquote><p>Just some text</p></blockquote>")).toEqual("> Just some text");
     });
 
     it('should not translate elements with attributes', function() {
@@ -153,6 +158,14 @@ describe("Html2Markdown", function() {
     
     it('should handle list with many items', function() {
       expect(Html2Markdown("<ol><li>Hej 1</li><li>Hej 2</li></ol>")).toEqual("1. Hej 1\n2. Hej 2\n");
+    });
+    
+  });
+  
+  describe("should translate blockquote", function() {
+    
+    it("should handle blockquote", function() {
+      expect(Html2Markdown("<blockquote>Hej</blockquote>")).toEqual("> Hej")
     });
     
   });
