@@ -14,6 +14,7 @@ var markdownStrings = [
 ,"_**help**_"
 ,"- Item1\n- Item2\n- Item3"
 ,"1. Item1\n2. Item2\n3. Item3"
+,"- _Item1_\n- **Item2**"
 ];
 
 describe("Html2Markdown", function() {
@@ -84,6 +85,10 @@ describe("Html2Markdown", function() {
     it('should translate element in paragraph', function() {
       expect(Html2Markdown("<p><em>Just some text</em></p>")).toEqual("_Just some text_");
     });
+    
+    it('should translate element in li', function() {
+      expect(Html2Markdown("<ul><li><em>Just some text</em></li></ul>")).toEqual("- _Just some text_\n");
+    });
 
     it("should not translate element with a div", function() {
       expect(Html2Markdown("<div><em>Just some text</em></div>")).toEqual("<div><em>Just some text</em></div>");
@@ -103,6 +108,10 @@ describe("Html2Markdown", function() {
 
     it("should not translate elements within a div", function() {
       expect(Html2Markdown("<div><strong>Just some text</strong></div>")).toEqual("<div><strong>Just some text</strong></div>");
+    });
+    
+    it('should translate element in li', function() {
+      expect(Html2Markdown("<ul><li><strong>Just some text</strong></li></ul>")).toEqual("- **Just some text**\n");
     });
   });
   

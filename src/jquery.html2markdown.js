@@ -11,11 +11,11 @@ function Html2Markdown(value) {
     $(this).replaceWith("**"+$(this).text()+"**"); 
   });
   
-  dom.find("> p > em, > em").each(function() {
+  dom.find("> p > em, > em, > ul > li > em").each(function() {
     $(this).replaceWith("_"+$(this).text()+"_"); 
   });
   
-  dom.find("> strong, > p > strong").each(function() {
+  dom.find("> strong, > p > strong, > ul > li > strong").each(function() {
     $(this).replaceWith("**"+$(this).text()+"**"); 
   });
   
