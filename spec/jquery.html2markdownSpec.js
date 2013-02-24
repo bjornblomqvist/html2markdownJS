@@ -2,6 +2,9 @@
 
 */
 
+// TODO, must fix so that we adde new line where needed ,
+// Input html might not have any between the elements and then nothing works =(
+
 var markdownStrings = [
 "---"
 ,"A single line paragraph"
