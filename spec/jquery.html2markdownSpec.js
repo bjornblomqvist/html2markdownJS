@@ -16,6 +16,14 @@ var markdownStrings = [
 ,"1. Item1\n2. Item2\n3. Item3"
 ,"- _Item1_\n- **Item2**"
 ,"# _Heading_\n## **Heading2**"
+,"# <span>Heading</span>"
+,"_<span>Something</span>_"
+,"**<span>Something</span>**"
+,"# _<span>Something</span>_"
+,"# **<span>Something</span>**"
+,"_**<span>Hej</span>**_"
+,"- <span>Yes we can!</span>"
+,"1. <span>Yes we can!</span>"
 ];
 
 describe("Html2Markdown", function() {

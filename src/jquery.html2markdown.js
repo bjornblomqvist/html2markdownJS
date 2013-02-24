@@ -8,17 +8,17 @@ function Html2Markdown(value) {
   });
   
   dom.find("em > strong").each(function() {
-    $(this).replaceWith("**"+$(this).text()+"**"); 
+    $(this).replaceWith("**"+$(this).html()+"**"); 
   });
   
   dom.find("> p > em, > em, > ul > li > em").each(function() {
-    $(this).replaceWith("_"+$(this).text()+"_"); 
+    $(this).replaceWith("_"+$(this).html()+"_"); 
   });
   
   
   
   dom.find("> strong, > p > strong, > ul > li > strong").each(function() {
-    $(this).replaceWith("**"+$(this).text()+"**"); 
+    $(this).replaceWith("**"+$(this).html()+"**"); 
   });
   
   dom.find("> p").each(function() {
@@ -29,16 +29,16 @@ function Html2Markdown(value) {
   
   dom.find("ul").each(function() {
     $(this).find('li').each(function() {
-      $(this).replaceWith("- "+$(this).text()+"\n");
+      $(this).replaceWith("- "+$(this).html()+"\n");
     });
-    $(this).replaceWith($(this).text());
+    $(this).replaceWith($(this).html());
   });
   
   dom.find("ol").each(function() {
     $(this).find('li').each(function(index,value) {
-      $(this).replaceWith((index+1)+". "+$(this).text()+"\n");
+      $(this).replaceWith((index+1)+". "+$(this).html()+"\n");
     });
-    $(this).replaceWith($(this).text());
+    $(this).replaceWith($(this).html());
   });
   
   $.each(["h1",'h2','h3','h4','h5'],function(index,value) {
@@ -51,14 +51,14 @@ function Html2Markdown(value) {
     
     dom.find("> "+value).each(function() {
       $(this).find("> strong").each(function() {
-        $(this).replaceWith("**"+$(this).text()+"**"); 
+        $(this).replaceWith("**"+$(this).html()+"**"); 
       });
       
       $(this).find("> em").each(function() {
-        $(this).replaceWith("_"+$(this).text()+"_"); 
+        $(this).replaceWith("_"+$(this).html()+"_"); 
       });
       
-      $(this).replaceWith(hashes+" "+$.trim($(this).text())); 
+      $(this).replaceWith(hashes+" "+$.trim($(this).html())); 
     });
   });
   
