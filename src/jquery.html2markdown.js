@@ -13,15 +13,14 @@ function getAfterPadding(element,padding) {
   return padding;
 }
 
-function getBeforePadding(element) {
+function getBeforePadding(element,padding) {
   var previous = $(element).get(0).previousSibling;
-  var padding = "\n\n";
   if(!previous) {
     padding = "";
   } else if(previous.nodeType === 3) {
     if(previous.data.match(/\n(\t| )*\n(\t| )*$/)) {
       padding = "";
-    } else if(previous.data.match(/\n(\t| )*$/)) {
+    } else if(previous.data.match(/\n(\t| )*$/) && padding.length > 1) {
       padding = "\n";
     }
   }
@@ -52,7 +51,7 @@ function Html2Markdown(value) {
   
   dom.find("> p, blockquote > p").each(function() {
     if($(this).get(0).attributes.length === 0) {
-      $(this).replaceWith(getBeforePadding(this)+$(this).html()+getAfterPadding(this,"\n\n"));
+      $(this).replaceWith(getBeforePadding(this,"\n\n")+$(this).html()+getAfterPadding(this,"\n\n"));
     }
   });
   
@@ -60,14 +59,14 @@ function Html2Markdown(value) {
     $(this).find('li').each(function() {
       $(this).replaceWith("- "+$(this).html()+getAfterPadding(this,"\n"));
     });
-    $(this).replaceWith($(this).html());
+    $(this).replaceWith(getBeforePadding(this,"\n\n")+$(this).html());
   });
   
   dom.find("ol").each(function() {
     $(this).find('li').each(function(index,value) {
-      $(this).replaceWith((index+1)+". "+$(this).html()+"\n");
+      $(this).replaceWith((index+1)+". "+$(this).html()+getAfterPadding(this,"\n"));
     });
-    $(this).replaceWith($(this).html());
+    $(this).replaceWith(getBeforePadding(this,"\n\n")+$(this).html());
   });
   
   dom.find('blockquote').each(function() {

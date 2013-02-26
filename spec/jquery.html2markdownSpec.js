@@ -35,6 +35,11 @@ var html2Markdown = {
   "<p>Html paragraph 1.</p><p>Html paragraph 2.</p>" : "Html paragraph 1.\n\nHtml paragraph 2."
   ,"<div>Its a div</div><p>Html paragraph 2.</p>" : "<div>Its a div</div>\n\nHtml paragraph 2."
   ,"<ul><li>One</li><li>two</li></ul>" : "- One\n- two"
+  ,"<ol><li>One</li><li>two</li></ol>" : "1. One\n2. two"
+  ,"<p>Html paragraph</p><ul><li>One</li><li>two</li></ul>" : "Html paragraph\n\n- One\n- two"
+  ,"<p>Html paragraph</p><ol><li>One</li><li>two</li></ol>" : "Html paragraph\n\n1. One\n2. two"
+  ,"<div>Div</div><ul><li>One</li><li>two</li></ul>" : "<div>Div</div>\n\n- One\n- two"
+  ,"<div>Div</div><ol><li>One</li><li>two</li></ol>" : "<div>Div</div>\n\n1. One\n2. two"
 };
 
 
@@ -178,11 +183,11 @@ describe("Html2Markdown", function() {
   describe("should translate ol lists", function() {
     
     it('should handle list with one item', function() {
-      expect(Html2Markdown("<ol><li>Hej</li></ol>")).toEqual("1. Hej\n");
+      expect(Html2Markdown("<ol><li>Hej</li></ol>")).toEqual("1. Hej");
     });
     
     it('should handle list with many items', function() {
-      expect(Html2Markdown("<ol><li>Hej 1</li><li>Hej 2</li></ol>")).toEqual("1. Hej 1\n2. Hej 2\n");
+      expect(Html2Markdown("<ol><li>Hej 1</li><li>Hej 2</li></ol>")).toEqual("1. Hej 1\n2. Hej 2");
     });
     
   });
