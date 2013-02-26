@@ -28,7 +28,8 @@ var stableMarkdownStrings = [
 ,"- <span>Yes we can!</span>"
 ,"1. <span>Yes we can!</span>"
 ,"- Test <br>\n- Fun!"
-,"> Paragraph one\nParagraph two"
+,"> Paragraph one\n>Paragraph two"
+,"This is a <i>test</i> paragraph"
 ];
 
 var html2Markdown = {
@@ -42,6 +43,7 @@ var html2Markdown = {
   ,"<div>Div</div><ol><li>One</li><li>two</li></ol>" : "<div>Div</div>\n\n1. One\n2. two"
   ,"<div><strong>Div</strong></div>" : "<div><strong>Div</strong></div>"
   ,"<div><em>Div</em></div>" : "<div><em>Div</em></div>"
+  ,"<blockquote><p>Goda nyheter för alla som gillar italiensk mat.\nNi slipper resa till Rom. En tur till Gamla Stan ger ljuvliga smakupplevelser.</p></blockquote>" : '> Goda nyheter för alla som gillar italiensk mat.\n>Ni slipper resa till Rom. En tur till Gamla Stan ger ljuvliga smakupplevelser.'
 };
 
 
