@@ -1,4 +1,33 @@
 
+function getAfterPadding(element,padding) {
+  var next = $(element).get(0).nextSibling;
+  if(!next) {
+    padding = "";
+  } else if(next.nodeType === 3) {
+    if(next.data.match(/^(\t| )*\n(\t| )*\n/)) {
+      padding = "";
+    } else if(next.data.match(/^(\t| )*\n/) && padding.length > 1) {
+      padding = "\n";
+    }
+  }
+  return padding;
+}
+
+function getBeforePadding(element) {
+  var previous = $(element).get(0).previousSibling;
+  var padding = "\n\n";
+  if(!previous) {
+    padding = "";
+  } else if(previous.nodeType === 3) {
+    if(previous.data.match(/\n(\t| )*\n(\t| )*$/)) {
+      padding = "";
+    } else if(previous.data.match(/\n(\t| )*$/)) {
+      padding = "\n";
+    }
+  }
+  return padding;
+} 
+
 function Html2Markdown(value) {
   var dom = $("<div id=\"root\"></div>");
   dom.append(value);
@@ -23,24 +52,13 @@ function Html2Markdown(value) {
   
   dom.find("> p, blockquote > p").each(function() {
     if($(this).get(0).attributes.length === 0) {
-      var next = $(this).get(0).nextSibling;
-      var padding = "\n\n";
-      if(!next) {
-        padding = "";
-      } else if(next.nodeType === 3) {
-        if(next.data.match(/^(\t| )*\n(\t| )*\n/)) {
-          padding = "";
-        } else if(next.data.match(/^(\t| )*\n/)) {
-          padding = "\n";
-        }
-      }
-      $(this).replaceWith($(this).html()+padding);
+      $(this).replaceWith(getBeforePadding(this)+$(this).html()+getAfterPadding(this,"\n\n"));
     }
   });
   
   dom.find("ul").each(function() {
     $(this).find('li').each(function() {
-      $(this).replaceWith("- "+$(this).html()+"\n");
+      $(this).replaceWith("- "+$(this).html()+getAfterPadding(this,"\n"));
     });
     $(this).replaceWith($(this).html());
   });

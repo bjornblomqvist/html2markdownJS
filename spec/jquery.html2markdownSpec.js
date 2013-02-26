@@ -33,6 +33,8 @@ var stableMarkdownStrings = [
 
 var html2Markdown = {
   "<p>Html paragraph 1.</p><p>Html paragraph 2.</p>" : "Html paragraph 1.\n\nHtml paragraph 2."
+  ,"<div>Its a div</div><p>Html paragraph 2.</p>" : "<div>Its a div</div>\n\nHtml paragraph 2."
+  ,"<ul><li>One</li><li>two</li></ul>" : "- One\n- two"
 };
 
 
@@ -125,7 +127,7 @@ describe("Html2Markdown", function() {
     });
     
     it('should translate element in li', function() {
-      expect(Html2Markdown("<ul><li><em>Just some text</em></li></ul>")).toEqual("- _Just some text_\n");
+      expect(Html2Markdown("<ul><li><em>Just some text</em></li></ul>")).toEqual("- _Just some text_");
     });
 
     it("should not translate element with a div", function() {
@@ -153,7 +155,7 @@ describe("Html2Markdown", function() {
     });
     
     it('should translate element in li', function() {
-      expect(Html2Markdown("<ul><li><strong>Just some text</strong></li></ul>")).toEqual("- **Just some text**\n");
+      expect(Html2Markdown("<ul><li><strong>Just some text</strong></li></ul>")).toEqual("- **Just some text**");
     });
     
     it('should translate element in heading', function() {
@@ -164,11 +166,11 @@ describe("Html2Markdown", function() {
   describe("should translate ul lists", function() {
     
     it('should handle list with one item', function() {
-      expect(Html2Markdown("<ul><li>Hej</li></ul>")).toEqual("- Hej\n");
+      expect(Html2Markdown("<ul><li>Hej</li></ul>")).toEqual("- Hej");
     });
     
     it('should handle list with many items', function() {
-      expect(Html2Markdown("<ul><li>Hej 1</li><li>Hej 2</li></ul>")).toEqual("- Hej 1\n- Hej 2\n");
+      expect(Html2Markdown("<ul><li>Hej 1</li><li>Hej 2</li></ul>")).toEqual("- Hej 1\n- Hej 2");
     });
     
   });
