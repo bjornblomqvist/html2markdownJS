@@ -40,6 +40,8 @@ var html2Markdown = {
   ,"<p>Html paragraph</p><ol><li>One</li><li>two</li></ol>" : "Html paragraph\n\n1. One\n2. two"
   ,"<div>Div</div><ul><li>One</li><li>two</li></ul>" : "<div>Div</div>\n\n- One\n- two"
   ,"<div>Div</div><ol><li>One</li><li>two</li></ol>" : "<div>Div</div>\n\n1. One\n2. two"
+  ,"<div><strong>Div</strong></div>" : "<div><strong>Div</strong></div>"
+  ,"<div><em>Div</em></div>" : "<div><em>Div</em></div>"
 };
 
 
