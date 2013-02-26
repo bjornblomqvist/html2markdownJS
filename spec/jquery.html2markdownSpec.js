@@ -5,7 +5,7 @@
 // TODO, must fix so that we adde new line where needed ,
 // Input html might not have any between the elements and then nothing works =(
 
-var markdownStrings = [
+var stableMarkdownStrings = [
 "---"
 ,"A single line paragraph"
 ,"Paragraph one\n\nParagraph two"
@@ -38,7 +38,7 @@ describe("Html2Markdown", function() {
   }); 
   
   it("should translate generated html back to the original markdown", function() {
-    $.each(markdownStrings,function(index,originalMarkdown) {
+    $.each(stableMarkdownStrings,function(index,originalMarkdown) {
       var translatedMarkdown = $.trim(Html2Markdown(marked(originalMarkdown)));
       expect(translatedMarkdown).toEqual(originalMarkdown);
     });
