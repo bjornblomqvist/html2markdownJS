@@ -31,6 +31,12 @@ var stableMarkdownStrings = [
 ,"> Paragraph one\nParagraph two"
 ];
 
+var html2Markdown = {
+  "<p>Html paragraph 1.</p><p>Html paragraph 2.</p>" : "Html paragraph 1.\n\nHtml paragraph 2."
+};
+
+
+
 describe("Html2Markdown", function() {
   
   it('should exist', function() {
@@ -41,6 +47,12 @@ describe("Html2Markdown", function() {
     $.each(stableMarkdownStrings,function(index,originalMarkdown) {
       var translatedMarkdown = $.trim(Html2Markdown(marked(originalMarkdown)));
       expect(translatedMarkdown).toEqual(originalMarkdown);
+    });
+  });
+  
+  it("should translate any html to a valid markdown where posible", function() {
+    $.each(html2Markdown,function(html,expectedMarkdown) {
+      expect(Html2Markdown(html)).toEqual(expectedMarkdown);
     });
   });
   
@@ -176,7 +188,7 @@ describe("Html2Markdown", function() {
   describe("should translate blockquote", function() {
     
     it("should handle blockquote", function() {
-      expect(Html2Markdown("<blockquote>Hej</blockquote>")).toEqual("> Hej")
+      expect(Html2Markdown("<blockquote>Hej</blockquote>")).toEqual("> Hej");
     });
     
   });

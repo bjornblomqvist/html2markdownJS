@@ -23,7 +23,18 @@ function Html2Markdown(value) {
   
   dom.find("> p, blockquote > p").each(function() {
     if($(this).get(0).attributes.length === 0) {
-     $(this).replaceWith($(this).html()); 
+      var next = $(this).get(0).nextSibling;
+      var padding = "\n\n";
+      if(!next) {
+        padding = "";
+      } else if(next.nodeType === 3) {
+        if(next.data.match(/^(\t| )*\n(\t| )*\n/)) {
+          padding = "";
+        } else if(next.data.match(/^(\t| )*\n/)) {
+          padding = "\n";
+        }
+      }
+      $(this).replaceWith($(this).html()+padding);
     }
   });
   
