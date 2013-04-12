@@ -70,7 +70,7 @@ function Html2Markdown(value) {
   });
   
   dom.find('blockquote').each(function() {
-    $(this).replaceWith("> "+$(this).html().replace(/\n/,'\n>'));
+    $(this).replaceWith("> "+$.trim($(this).html()).replace(/\n{2,20}/g,"\n\n").replace(/\n/g,'\n> ').replace(/> \n/g,">\n"));
   });
   
   $.each(["h1",'h2','h3','h4','h5'],function(index,value) {
@@ -97,5 +97,5 @@ function Html2Markdown(value) {
     });
   });
   
-  return dom.html().replace(/^&gt;/mg,'>').replace(/^&lt;/mg,'<');
+  return dom.html().replace(/^&gt;/mg,'>').replace(/^&lt;/mg,'<').replace(/\n{2,20}/g,"\n\n");
 }
