@@ -92,7 +92,7 @@ function Html2Markdown(value) {
           $(this).replaceWith("_"+$(this).html()+"_"); 
         });
       
-        $(this).replaceWith(hashes+" "+$.trim($(this).html())); 
+        $(this).replaceWith(getBeforePadding(this,"\n\n")+hashes+" "+$.trim($(this).html())); 
       }
     });
   });
