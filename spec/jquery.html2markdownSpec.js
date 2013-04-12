@@ -57,7 +57,7 @@ describe("Html2Markdown", function() {
   it("should translate generated html back to the original markdown", function() {
     $.each(stableMarkdownStrings,function(index,originalMarkdown) {
       var translatedMarkdown = $.trim(Html2Markdown(marked(originalMarkdown)));
-      expect(translatedMarkdown).toEqual(originalMarkdown);
+      expect(translatedMarkdown.replace(/(\n+)/g,'\n')).toEqual(originalMarkdown.replace(/(\n+)/g,'\n'));
     });
   });
   
