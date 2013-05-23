@@ -45,6 +45,7 @@ var html2Markdown = {
   ,"<div><em>Div</em></div>" : "<div><em>Div</em></div>"
   ,"<blockquote><p>Goda nyheter för alla som gillar italiensk mat.\nNi slipper resa till Rom. En tur till Gamla Stan ger ljuvliga smakupplevelser.</p></blockquote>" : '> Goda nyheter för alla som gillar italiensk mat.\n> Ni slipper resa till Rom. En tur till Gamla Stan ger ljuvliga smakupplevelser.'
   ,'<h1>Kontakt</h1><h2>Restaurang Villa Godthem på Djurgården AB</h2>': '# Kontakt\n\n## Restaurang Villa Godthem på Djurgården AB'
+  ,'<h1>Kontakt</h1><p>Restaurang Villa Godthem på Djurgården AB</p>': '# Kontakt\n\nRestaurang Villa Godthem på Djurgården AB'
 };
 
 
