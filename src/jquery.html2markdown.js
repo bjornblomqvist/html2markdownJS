@@ -32,7 +32,11 @@ function Html2Markdown(value) {
   dom.append(value);
   
   dom.find("> hr").each(function() {
-    $(this).replaceWith("---");
+    var newLine = "\n\n";
+    if($(this).next().length === 0) {
+      newLine = "";
+    }
+    $(this).replaceWith("---" + newLine);
   });
   
   dom.find("em > strong").each(function() {
