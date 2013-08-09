@@ -72,8 +72,8 @@ describe("Html2Markdown", function() {
   
   it('should translate hr elements' ,function() {
     expect(Html2Markdown("<hr>")).toEqual("---");
-    expect(Html2Markdown("<hr>\n")).toEqual("---\n");
-    expect(Html2Markdown("\n\n<hr>\n")).toEqual("\n\n---\n");
+    expect(Html2Markdown("<hr>\n")).toEqual("---\n\n");
+    expect(Html2Markdown("\n\n<hr>\n")).toEqual("\n\n---\n\n");
     expect(Html2Markdown("<hr><div>Hej</div>")).toEqual("---\n\n<div>Hej</div>");
   });
   

@@ -32,11 +32,7 @@ function Html2Markdown(value) {
   dom.append(value);
   
   dom.find("> hr").each(function() {
-    var newLine = "\n\n";
-    if($(this).next().length === 0) {
-      newLine = "";
-    }
-    $(this).replaceWith("---" + newLine);
+    $(this).replaceWith(getBeforePadding(this,"\n\n") + "---" + getAfterPadding(this,"\n\n"));
   });
   
   dom.find("em > strong").each(function() {
@@ -63,7 +59,8 @@ function Html2Markdown(value) {
     $(this).find('li').each(function() {
       $(this).replaceWith("- "+$(this).html()+getAfterPadding(this,"\n"));
     });
-    $(this).replaceWith(getBeforePadding(this,"\n\n")+$(this).html());
+    
+    $(this).replaceWith(getBeforePadding(this,"\n\n") + $(this).html() + getAfterPadding(this,"\n\n"));
   });
   
   dom.find("ol").each(function() {
@@ -96,12 +93,7 @@ function Html2Markdown(value) {
           $(this).replaceWith("_"+$(this).html()+"_"); 
         });
       
-        var newLine = "\n\n";
-        if($(this).next().length === 0) {
-          newLine = "";
-        }
-      
-        $(this).replaceWith(getBeforePadding(this,"\n\n")+hashes+" "+$.trim($(this).html()) + newLine); 
+        $(this).replaceWith(getBeforePadding(this,"\n\n")+hashes+" "+$.trim($(this).html()) + getAfterPadding(this,"\n\n")); 
       }
     });
   });
