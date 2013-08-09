@@ -84,6 +84,11 @@ function Html2Markdown(value) {
     
     dom.find("> "+value).each(function() {
       
+      // Remove any auto ids
+      if($(this).attr("id") == $(this).html().toLowerCase().replace(/[^\w]+/g, '-')) {
+        $(this).removeAttr("id");
+      }
+      
       if($(this).get(0).attributes.length === 0) {      
         $(this).find("> strong").each(function() {
           $(this).replaceWith("**"+$(this).html()+"**"); 

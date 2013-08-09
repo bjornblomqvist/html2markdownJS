@@ -84,6 +84,10 @@ describe("Html2Markdown", function() {
   
   describe("should translates headings", function() {
     
+    it("should remove auto ids", function() {
+      expect(Html2Markdown('<h1 id="hej-jag-heter-bj-rn">Hej jag heter Björn</h1>')).toEqual("# Hej jag heter Björn")
+    });
+    
     it("should translate heading elements", function() {
       expect(Html2Markdown("<h1>Heading 1</h1>")).toEqual("# Heading 1");
       expect(Html2Markdown("<h2>Heading 2</h2>")).toEqual("## Heading 2");
