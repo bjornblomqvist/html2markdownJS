@@ -77,6 +77,21 @@ describe("Html2Markdown", function() {
     expect(Html2Markdown("<hr><div>Hej</div>")).toEqual("---\n\n<div>Hej</div>");
   });
   
+  it('should skipp any elements with any attribute', function() {
+    
+    var elementsWithAttribute = [ '<hr class="help">',
+      '<h1 class="help">Heading 1</h1>',
+      '<em class="help">Just some text</em>',
+      '<ol class="help"><li>Hej</li></ol>',
+      '<ul class="help"><li>Hej</li></ul>',
+      '<blockquote class="help">Hej</blockquote>'
+      ]
+    
+    $.each(elementsWithAttribute, function(index, value) {
+      expect(Html2Markdown(value)).toEqual(value);
+    });
+  });
+  
   
   it('should only translate hr elements at the first level', function() {
     expect(Html2Markdown("<div><hr></div>")).toEqual("<div><hr></div>");
