@@ -202,6 +202,14 @@ describe("Html2Markdown", function() {
       expect(Html2Markdown("<ol><li>Hej 1</li><li>Hej 2</li></ol>")).toEqual("1. Hej 1\n2. Hej 2");
     });
     
+    it("should handle multable li with linebreaks between them", function() {
+      
+      var html = "<ul>\n      <li>All the tools your need to create mobile apps.</li>\n      <li>Templates and Themes.</li>\n      <li>Ability to link film and music.</li>\n      <li>Ability to add statistics.</li>\n      <li>Hosting Fees (up to 10 GB per month – around 10,000 visitors)</li>\n      </ul>"
+      var result = "- All the tools your need to create mobile apps.\n- Templates and Themes.\n- Ability to link film and music.\n- Ability to add statistics.\n- Hosting Fees (up to 10 GB per month – around 10,000 visitors)";
+      
+      expect(Html2Markdown(html)).toEqual(result);
+    });
+    
   });
   
   describe("should translate blockquote", function() {

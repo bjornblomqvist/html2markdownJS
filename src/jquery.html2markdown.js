@@ -27,6 +27,18 @@ function getBeforePadding(element,padding) {
   return padding;
 } 
 
+function removeTralingWhiteSpace(element) {
+  if(element && element.nodeType === 3) {
+    element.data = element.data.replace(/\s+$/,'');
+  }
+}
+
+function removeStartingWhiteSpace(element) {
+  if(element && element.nodeType === 3) {
+    element.data = element.data.replace(/^\s+/,'');
+  }
+}
+
 function Html2Markdown(value) {
   var dom = $("<div id=\"root\"></div>");
   dom.append(value);
@@ -56,8 +68,15 @@ function Html2Markdown(value) {
   });
   
   dom.find("ul").each(function() {
+    $(this).contents().each(function() {
+      if(this.nodeType === 3) {
+        $(this).remove();
+      }
+    });
+    
     $(this).find('li').each(function() {
-      $(this).replaceWith("- "+$(this).html()+getAfterPadding(this,"\n"));
+      removeTralingWhiteSpace($(this).get(0).previousSibling);
+      $(this).replaceWith(getBeforePadding(this,"\n") + "- "+$(this).html() + getAfterPadding(this,"\n"));
     });
     
     $(this).replaceWith(getBeforePadding(this,"\n\n") + $(this).html() + getAfterPadding(this,"\n\n"));
@@ -85,7 +104,7 @@ function Html2Markdown(value) {
     dom.find("> "+value).each(function() {
       
       // Remove any auto ids
-      if($(this).attr("id") == $(this).html().toLowerCase().replace(/[^\w]+/g, '-')) {
+      if($(this).attr("id") === $(this).html().toLowerCase().replace(/[^\w]+/g, '-')) {
         $(this).removeAttr("id");
       }
       
