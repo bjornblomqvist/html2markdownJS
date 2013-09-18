@@ -53,7 +53,7 @@ function Html2Markdown(value) {
     }
   });
   
-  dom.find("em > strong").each(function() {
+  dom.find("> p > em > strong").each(function() {
     $(this).replaceWith("**"+$(this).html()+"**"); 
   });
   
@@ -75,7 +75,11 @@ function Html2Markdown(value) {
     }
   });
   
-  dom.find("ul").each(function() {
+  dom.find("> ul").each(function() {
+    if($(this).find('li li').length > 0) {
+      return;
+    }
+    
     if(!shouldSkip(this)) {  
       $(this).contents().each(function() {
         if(this.nodeType === 3) {
@@ -92,7 +96,11 @@ function Html2Markdown(value) {
     }
   });
   
-  dom.find("ol").each(function() {
+  dom.find("> ol").each(function() {
+    if($(this).find('li li').length > 0) {
+      return;
+    }
+    
     if(!shouldSkip(this)) {    
       
       $(this).contents().each(function() {
@@ -109,7 +117,7 @@ function Html2Markdown(value) {
     }
   });
   
-  dom.find('blockquote').each(function() {
+  dom.find('> blockquote').each(function() {
     if(!shouldSkip(this)) {  
       $(this).replaceWith("> "+$.trim($(this).html()).replace(/\n{2,20}/g,"\n\n").replace(/\n/g,'\n> ').replace(/> \n/g,">\n"));
     }

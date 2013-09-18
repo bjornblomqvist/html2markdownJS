@@ -85,7 +85,7 @@ describe("Html2Markdown", function() {
       '<ol class="help"><li>Hej</li></ol>',
       '<ul class="help"><li>Hej</li></ul>',
       '<blockquote class="help">Hej</blockquote>'
-      ]
+      ];
     
     $.each(elementsWithAttribute, function(index, value) {
       expect(Html2Markdown(value)).toEqual(value);
@@ -100,7 +100,7 @@ describe("Html2Markdown", function() {
   describe("should translates headings", function() {
     
     it("should remove auto ids", function() {
-      expect(Html2Markdown('<h1 id="hej-jag-heter-bj-rn">Hej jag heter Björn</h1>')).toEqual("# Hej jag heter Björn")
+      expect(Html2Markdown('<h1 id="hej-jag-heter-bj-rn">Hej jag heter Björn</h1>')).toEqual("# Hej jag heter Björn");
     });
     
     it("should translate heading elements", function() {
@@ -193,6 +193,14 @@ describe("Html2Markdown", function() {
     it('should translate element in heading', function() {
       expect(Html2Markdown("<h1><strong>Just some text</strong></h1>")).toEqual("# **Just some text**");
     });
+    
+    it('should translate strong as a child of em', function() {
+      expect(Html2Markdown("<p><em><strong>Just some text</strong></em></p>")).toEqual("_**Just some text**_");
+    });
+    
+    it('should not translate strong as a child of em when em is not in a paragraph', function() {
+      expect(Html2Markdown("<div><em><strong>Just some text</strong></em></div>")).toEqual("<div><em><strong>Just some text</strong></em></div>");
+    });
   });
   
   describe("should translate ul lists", function() {
@@ -203,6 +211,14 @@ describe("Html2Markdown", function() {
     
     it('should handle list with many items', function() {
       expect(Html2Markdown("<ul><li>Hej 1</li><li>Hej 2</li></ul>")).toEqual("- Hej 1\n- Hej 2");
+    });
+    
+    it('should ignore lists that are not in the root element', function() {
+      expect(Html2Markdown("<div><ul><li>Hej 1</li><li>Hej 2</li></ul></div>")).toEqual("<div><ul><li>Hej 1</li><li>Hej 2</li></ul></div>");
+    });
+    
+    it('sholud skip lists with multable levels', function() {
+      expect(Html2Markdown("<ul><li>Parent</li><li><ul><li>Child</li></ul></li></ul>")).toEqual("<ul><li>Parent</li><li><ul><li>Child</li></ul></li></ul>");
     });
     
   });
@@ -219,10 +235,18 @@ describe("Html2Markdown", function() {
     
     it("should handle multable li with linebreaks between them", function() {
       
-      var html = "<ul>\n      <li>All the tools your need to create mobile apps.</li>\n      <li>Templates and Themes.</li>\n      <li>Ability to link film and music.</li>\n      <li>Ability to add statistics.</li>\n      <li>Hosting Fees (up to 10 GB per month – around 10,000 visitors)</li>\n      </ul>"
+      var html = "<ul>\n      <li>All the tools your need to create mobile apps.</li>\n      <li>Templates and Themes.</li>\n      <li>Ability to link film and music.</li>\n      <li>Ability to add statistics.</li>\n      <li>Hosting Fees (up to 10 GB per month – around 10,000 visitors)</li>\n      </ul>";
       var result = "- All the tools your need to create mobile apps.\n- Templates and Themes.\n- Ability to link film and music.\n- Ability to add statistics.\n- Hosting Fees (up to 10 GB per month – around 10,000 visitors)";
       
       expect(Html2Markdown(html)).toEqual(result);
+    });
+    
+    it('should ignore lists that are not in the root element', function() {
+      expect(Html2Markdown("<div><ol><li>Hej 1</li><li>Hej 2</li></ol></div>")).toEqual("<div><ol><li>Hej 1</li><li>Hej 2</li></ol></div>");
+    });
+    
+    it('sholud skip lists with multable levels', function() {
+      expect(Html2Markdown("<ol><li>Parent</li><li><ol><li>Child</li></ol></li></ol>")).toEqual("<ol><li>Parent</li><li><ol><li>Child</li></ol></li></ol>");
     });
     
   });
@@ -231,6 +255,10 @@ describe("Html2Markdown", function() {
     
     it("should handle blockquote", function() {
       expect(Html2Markdown("<blockquote>Hej</blockquote>")).toEqual("> Hej");
+    });
+    
+    it("should not handle blockquote not in the root", function() {
+      expect(Html2Markdown("<div><blockquote>Hej</blockquote></div>")).toEqual("<div><blockquote>Hej</blockquote></div>");
     });
     
   });
