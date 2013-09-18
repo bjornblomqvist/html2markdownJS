@@ -75,28 +75,7 @@ function Html2Markdown(value) {
     }
   });
   
-  dom.find("> ul").each(function() {
-    if($(this).find('li li').length > 0) {
-      return;
-    }
-    
-    if(!shouldSkip(this)) {  
-      $(this).contents().each(function() {
-        if(this.nodeType === 3) {
-          $(this).remove();
-        }
-      });
-    
-      $(this).find('li').each(function() {
-        removeTralingWhiteSpace($(this).get(0).previousSibling);
-        $(this).replaceWith(getBeforePadding(this,"\n") + "- "+$(this).html() + getAfterPadding(this,"\n"));
-      });
-    
-      $(this).replaceWith(getBeforePadding(this,"\n\n") + $(this).html() + getAfterPadding(this,"\n\n"));
-    }
-  });
-  
-  dom.find("> ol").each(function() {
+  dom.find("> ol, > ul").each(function() {
     if($(this).find('li li').length > 0) {
       return;
     }
@@ -109,11 +88,14 @@ function Html2Markdown(value) {
         }
       });
       
-      $(this).find('li').each(function(index,value) {
+      var isOL = $(this).is("ol");
+      
+      $(this).find('li').each(function(index, value) {
+        var listIndicator = isOL ? String(index+1) + "." : "-";
         removeTralingWhiteSpace($(this).get(0).previousSibling);
-        $(this).replaceWith(getBeforePadding(this,"\n")+(index+1)+". "+$(this).html()+getAfterPadding(this,"\n"));
+        $(this).replaceWith(getBeforePadding(this,"\n")+listIndicator+" "+$(this).html()+getAfterPadding(this,"\n"));
       });
-      $(this).replaceWith(getBeforePadding(this,"\n\n")+$(this).html());
+      $(this).replaceWith(getBeforePadding(this,"\n\n") + $(this).html() + getAfterPadding(this,"\n\n"));
     }
   });
   
