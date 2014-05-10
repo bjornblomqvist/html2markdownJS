@@ -101,7 +101,7 @@ function Html2Markdown(value) {
   
   dom.find('> blockquote').each(function() {
     if(!shouldSkip(this)) {  
-      $(this).replaceWith("> "+$.trim($(this).html()).replace(/\n{2,20}/g,"\n\n").replace(/\n/g,'\n> ').replace(/> \n/g,">\n"));
+      $(this).replaceWith("> "+$.trim($(this).html()).replace(/\n{2,20}/g,"\n\n").replace(/\n/g,'\n> ').replace(/> \n/g,">\n") + "\n\n");
     }
   });
   
@@ -134,5 +134,5 @@ function Html2Markdown(value) {
     });
   });
   
-  return dom.html().replace(/^&gt;/mg,'>').replace(/^&lt;/mg,'<').replace(/\n{2,20}/g,"\n\n");
+  return $.trim(dom.html().replace(/^&gt;/mg,'>').replace(/^&lt;/mg,'<').replace(/\n{2,20}/g,"\n\n"));
 }

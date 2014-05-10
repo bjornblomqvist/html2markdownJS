@@ -47,6 +47,7 @@ var html2Markdown = {
   ,'<h1>Kontakt</h1><h2>Restaurang Villa Godthem på Djurgården AB</h2>': '# Kontakt\n\n## Restaurang Villa Godthem på Djurgården AB'
   ,'<h1>Kontakt</h1><p>Restaurang Villa Godthem på Djurgården AB</p>': '# Kontakt\n\nRestaurang Villa Godthem på Djurgården AB'
   ,'<h1>Pellentesque imperdiet</h1><img class="movable ui-draggable ui-droppable right" src="/burp/files/large/change-page-title-4.png">' : '# Pellentesque imperdiet\n\n<img class="movable ui-draggable ui-droppable right" src="/burp/files/large/change-page-title-4.png">'
+  ,'<blockquote> <p>I am in the footer!</p> </blockquote> <img src="/burp/files/large/=|_-z=a;6io,.png" class="left ui-droppable movable ui-draggable">' : '> I am in the footer!\n\n <img src="/burp/files/large/=|_-z=a;6io,.png" class="left ui-droppable movable ui-draggable">'
 };
 
 
@@ -72,8 +73,8 @@ describe("Html2Markdown", function() {
   
   it('should translate hr elements' ,function() {
     expect(Html2Markdown("<hr>")).toEqual("---");
-    expect(Html2Markdown("<hr>\n")).toEqual("---\n\n");
-    expect(Html2Markdown("\n\n<hr>\n")).toEqual("\n\n---\n\n");
+    expect(Html2Markdown("<hr>\nSome text")).toEqual("---\n\nSome text");
+    expect(Html2Markdown("This is \n\n<hr>\n something")).toEqual("This is \n\n---\n\n something");
     expect(Html2Markdown("<hr><div>Hej</div>")).toEqual("---\n\n<div>Hej</div>");
   });
   
