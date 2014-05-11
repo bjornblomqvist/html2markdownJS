@@ -48,6 +48,7 @@ var html2Markdown = {
   ,'<h1>Kontakt</h1><p>Restaurang Villa Godthem på Djurgården AB</p>': '# Kontakt\n\nRestaurang Villa Godthem på Djurgården AB'
   ,'<h1>Pellentesque imperdiet</h1><img class="movable ui-draggable ui-droppable right" src="/burp/files/large/change-page-title-4.png">' : '# Pellentesque imperdiet\n\n<img class="movable ui-draggable ui-droppable right" src="/burp/files/large/change-page-title-4.png">'
   ,'<blockquote> <p>I am in the footer!</p> </blockquote> <img src="/burp/files/large/=|_-z=a;6io,.png" class="left ui-droppable movable ui-draggable">' : '> I am in the footer!\n\n <img src="/burp/files/large/=|_-z=a;6io,.png" class="left ui-droppable movable ui-draggable">'
+  ,'<img src="/burp/files/large/Screen shot 2013-05-22 at 3.41.40 PM.png" class="center"><img src="/burp/files/large/=|_-z=a;6io,.png" class="left"><img src="/burp/files/large/=|_-z=a;6io,.png" class="left">' : '<img src="/burp/files/large/Screen shot 2013-05-22 at 3.41.40 PM.png" class="center">\n<img src="/burp/files/large/=|_-z=a;6io,.png" class="left">\n<img src="/burp/files/large/=|_-z=a;6io,.png" class="left">'
 };
 
 

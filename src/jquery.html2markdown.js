@@ -134,5 +134,9 @@ function Html2Markdown(value) {
     });
   });
   
+  dom.find("> img").each(function() {
+    $(this).replaceWith($("<div></div>").append($(this).clone()).html() + "\n");
+  });
+  
   return $.trim(dom.html().replace(/^&gt;/mg,'>').replace(/^&lt;/mg,'<').replace(/\n{2,20}/g,"\n\n"));
 }
